@@ -157,6 +157,11 @@ TRUE %>% mean(c(NA, 1:101), na.rm = .)
 
 1:101 %>% c(NA) %>% mean(na.rm = TRUE)
 #é a mesma coisa que mean(1:101 %>% c(NA), na.rm=TRUE)
+
+arq <- '_source/assets/dados/arq.txt'
+dados <- read.table(file = arq)
   
   
   
+dados <- read.table(file = arq, sep = ";") 
+str(dados)

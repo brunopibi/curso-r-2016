@@ -1,0 +1,13 @@
+---
+title: "Lab02"
+author: "Curso R de Verão 2016"
+date: "20 de janeiro de 2016"
+output: html_document
+---
+
+##EXERCICIO 1
+```{r}
+> arq <- 'C://Users/adm/Desktop/ArquivosLab02/pnud.txt'
+
+```
+
