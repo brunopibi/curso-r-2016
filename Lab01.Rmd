@@ -9,11 +9,17 @@ output: html_document
 ```{r}
 moeda <- function(p){
   x <- runif(1)
-    if (x<0.5){
+    if (x<p){
       0
     }else{
       1
     }
+}
+
+moedas <- function(n,p){
+  y <- n
+  x <- runif(1)
+  
 }
 ```
 
