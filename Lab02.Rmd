@@ -6,8 +6,9 @@ output: html_document
 ---
 
 ##EXERCICIO 1
+
 ```{r}
-> arq <- 'C://Users/adm/Desktop/ArquivosLab02/pnud.txt'
+
 
 ```
 
