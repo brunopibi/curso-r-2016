@@ -1,0 +1,43 @@
+---
+title: "Lab03"
+author: "Curso R de Verão 2016"
+date: "22 de janeiro de 2016"
+output: html_document
+---
+
+```{r}
+#FILTER
+#1- ATRIBUA A UMA TABELA APENAS OS VOOS DE JANEIRO/2013
+
+flights %>%
+  select(year, month, day, dep_time, arr_time, hour, minute)%>%
+  filter(year==2013, month == 1)
+
+#2- ATRIBUA A UMA TABELA APENAS OS VOOS DE JANEIRO/2013 e FEV/2013
+flights %>%
+  select(year, month, day, dep_time, arr_time, hour, minute)%>%
+  filter(year==2013, month <= 2)
+
+#3- ATRIBUA A UMA TABELA APENAS OS VOOS COM DISTANCIA MAIOR DO Que 1000 milhas
+flights %>%
+  select(year, month, day, dep_time, arr_time, hour, minute, distance)%>%
+  filter(distance > 1000)
+```
+
+##SELECT
+
+```{r}
+  #1 - Atribua a uma tabela apenas as colunas month e dep_delay.
+  flights %>%
+  select(month, dep_delay)
+
+#2 - Atribua a uma tabela apenas as colunas month e dep_delay, os nomes dessas colunas devem ser mes e atraso.
+flights %>%
+  select(mes = month, atraso =dep_delay)
+
+#3 - Retire da tabela as colunas tailnum, origin e dest
+  flights %>%
+  select(-tailnum, -origin, -dest)
+
+```
+

@@ -7,7 +7,7 @@ output: html_document
 
 
 ```{r}
-moeda <- function(p=0.5){
+moeda <- function(p){
   x <- runif(1)
     if (x<p){
       0
@@ -16,7 +16,7 @@ moeda <- function(p=0.5){
     }
 }
 
-moedas <- function(n,p=0.5){
+moedas <- function(n,p){
   i <- 1
   vetor <- numeric(length(n))
   for(i in 1:n){
@@ -29,6 +29,18 @@ proporcao <- function(resultados){
   tamanho <- length(resultados)
 return(sum(resultados)/tamanho)
 }
+
+simulacao <- function(k,n,p){
+  i <- 1
+  vetor <- numeric(length(k))
+  for(i in 1:k){
+    vetor[i] <- proporcao(moedas(n,p))
+  }
+  return(vetor)
+  
+}
+
+hist(simulacao(20,5))
 
 
 
