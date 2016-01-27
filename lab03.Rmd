@@ -7,17 +7,22 @@ output: html_document
 
 ```{r}
 
+
 #Operador pipe %>%
-install.packages("magrittr")
+#install.packages("magrittr")
 library(magrittr)
 
-install.packages("nycfligths13")
+#install.packages("nycfligths13")
 library(nycflights13)
 
 library(dplyr)
 
-# ***************** FILTER ***********************
 
+
+```
+##FILTER
+
+```{r}
 #1- ATRIBUA A UMA TABELA APENAS OS VOOS DE JANEIRO/2013
 
 flights %>%
@@ -34,9 +39,13 @@ flights %>%
   select(year, month, day, dep_time, arr_time, hour, minute, distance)%>%
   filter(distance > 1000)
 
-#******************* SELECT *********************
+```
 
-  #1 - Atribua a uma tabela apenas as colunas month e dep_delay.
+
+##SELECT
+```{r}
+
+ #1 - Atribua a uma tabela apenas as colunas month e dep_delay.
   flights %>%
   select(month, dep_delay)
 
@@ -47,6 +56,25 @@ flights %>%
 #3 - Retire da tabela as colunas tailnum, origin e dest
   flights %>%
   select(-tailnum, -origin, -dest)
+
+
+```
+##MUTATE
+```{r}
+
+#1- Calcule as colunas ganho_de_tempo que é dado por dep_delay - arr_delay e velocidade dada por distance / air_time * 60.
+  flights %>%
+  select(air_time, dep_delay, arr_delay, distance, air_time) %>%
+  mutate(ganho_de_tempo = dep_delay - arr_delay, velocidade = distance /air_time * 60) %>% tbl_df
+
+#2.Calcule o horário de chegada considerando as colunas hour, minute e air_time. A tabela deve conter duas colunas novas: hour2 com a hora de chegada e minute2 com o minuto de chegada.
+
+flights %>%
+  select(year,month, day, hour, minute, air_time) %>%
+   mutate(hour2=(((hour*60)+minute +air_time))%/%60, minute2=(((hour*60)+minute +air_time))%%60) %>% tbl_df
+
+
+
 
 ```
 
