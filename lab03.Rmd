@@ -79,7 +79,7 @@ flights %>%
 
 ```
 
-#SUMARIZE
+#SUMMARISE
 ```{r}
 
 #1. Calcule a média da distância de todos os vôos.
