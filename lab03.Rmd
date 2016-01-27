@@ -6,7 +6,18 @@ output: html_document
 ---
 
 ```{r}
-#FILTER
+
+#Operador pipe %>%
+install.packages("magrittr")
+library(magrittr)
+
+install.packages("nycfligths13")
+library(nycflights13)
+
+library(dplyr)
+
+# ***************** FILTER ***********************
+
 #1- ATRIBUA A UMA TABELA APENAS OS VOOS DE JANEIRO/2013
 
 flights %>%
@@ -22,11 +33,9 @@ flights %>%
 flights %>%
   select(year, month, day, dep_time, arr_time, hour, minute, distance)%>%
   filter(distance > 1000)
-```
 
-##SELECT
+#******************* SELECT *********************
 
-```{r}
   #1 - Atribua a uma tabela apenas as colunas month e dep_delay.
   flights %>%
   select(month, dep_delay)
