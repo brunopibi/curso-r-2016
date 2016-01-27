@@ -40,7 +40,7 @@ simulacao <- function(k,n,p){
   
 }
 
-hist(simulacao(20,5))
+hist(simulacao(1000,50,0.5))
 
 
 
