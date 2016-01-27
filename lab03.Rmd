@@ -79,3 +79,14 @@ flights %>%
 
 ```
 
+#SUMARIZE
+```{r}
+
+#1. Calcule a média da distância de todos os vôos.
+flights %>% summarise(media = mean(distance))
+
+#2. Calcule a média da distância dos vôos por mês
+flights %>% group_by(year, month) %>% summarise(media = mean(distance))
+
+```
+
