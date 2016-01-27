@@ -5,8 +5,12 @@ date: "18 de janeiro de 2016"
 output: html_document
 ---
 
-
+#Bruno José do Nascimento
 ```{r}
+
+
+
+
 moeda <- function(p){
   x <- runif(1)
     if (x<p){
@@ -40,7 +44,9 @@ simulacao <- function(k,n,p){
   
 }
 
-hist(simulacao(1000,50,0.5))
+hist(simulacao(k=1000,n=50,p=0.5))
+hist(simulacao(k=1000,n=100,p=0.5))
+hist(simulacao(k=1000,n=1000,p=0.5))
 
 
 
