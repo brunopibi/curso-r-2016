@@ -1,6 +1,6 @@
 ---
 title: "Lab03"
-author: "Curso R de Verão 2016"
+author: "Bruno José do Nascimento"
 date: "22 de janeiro de 2016"
 output: html_document
 ---
@@ -87,6 +87,58 @@ flights %>% summarise(media = mean(distance))
 
 #2. Calcule a média da distância dos vôos por mês
 flights %>% group_by(year, month) %>% summarise(media = mean(distance))
+
+#3. Calcule a média, mediana, primeiro quartil e terceiro quartil do tempo de viagem por mês.
+
+flights %>% group_by(year, month) %>% summarise(media = mean(air_time, na.rm = TRUE), mediana = median(air_time, na.rm = TRUE), Primeiro_Quartil = quantile(air_time, 0.25, na.rm = TRUE), Terceiro_Quartil = quantile(air_time, 0.75, na.rm = TRUE))
+
+```
+
+#ARRANGE
+```{r}
+
+#1. Ordene a base de dados pelo atraso na partida em ordem crescente
+  flights %>% select(year, month, day, dep_time, arr_time, dep_delay) %>%
+  arrange((dep_delay)) 
+
+#2. Ordene a base de dados pelo atraso na partida em ordem decrescente
+  flights %>% select(year, month, day, dep_time, arr_time, dep_delay) %>%
+  arrange(desc(dep_delay)) 
+
+```
+
+#SPREAD
+
+```{r}
+
+#1- Crie uma tabela em que cada linha é um dia e cada coluna é o atraso médio de partida por mês.
+library(tidyr)
+flights_spread <- flights %>%
+  group_by(day, month) %>%
+  summarise(atraso=mean(dep_delay, na.rm = TRUE)) %>%
+  ungroup()%>%
+spread(month, atraso)
+
+flights_spread
+
+#2- Repita a mesma operação, mas dessa vez cada coluna será uma hora do dia
+flights %>%
+  group_by(hour, day) %>%
+  summarise(atraso=mean(dep_delay, na.rm = TRUE)) %>%
+  ungroup()%>%
+spread(day, atraso)
+
+```
+
+#GATHER
+
+```{r}
+
+#1- Transforme-as em um formato tidy.
+
+flights_spread %>%
+  gather(month, atraso, -day ,na.rm=TRUE)
+
 
 ```
 
