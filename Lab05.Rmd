@@ -1,11 +1,19 @@
 ---
 title: "Lab05"
-author: "Curso R de Verão 2016"
+author: "Bruno José do Nascimento"
 date: "29 de janeiro de 2016"
 output: html_document
 ---
 
 ```{r}
+
+#DICA
+#1 - MODELE - MODELO_LM/MODELO_TREE ~ USAR IMG_DF_PARTE2
+#2 - PREDITO_LM <- PREDICT(MODELO_LM, IMG_DF_PARTE1)
+#   PREDITO_TREE <- PREDICT(MODELO_TREE, IMG_DF_PARTE1)
+#3 - adicionar predito_xx COMO COLUNA DA BASE IMG_DF_PARTE1
+#4 - RMSE = SOMA
+
 library(ggplot2)
 library(magrittr)
 library(tidyr)
