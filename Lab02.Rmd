@@ -8,7 +8,16 @@ output: html_document
 ##EXERCICIO 1
 
 ```{r}
+library(readr)
 
+arq <- '_source/assets/dados/arq.txt'
+dados <- read.table(file = arq)
+
+link_pnud <- 'https://www.dropbox.com/s/seqctcl46qeemgu/pnud_simplificado.rds?dl=1'
+tmp <- tempfile()
+httr::GET(link_pnud, httr::write_disk(tmp))
+pnud <- readRDS(tmp)
+file.remove(tmp)
 
 ```
 
