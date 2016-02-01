@@ -1,6 +1,6 @@
 ---
 title: "Lab02"
-author: "Curso R de Verão 2016"
+author: "Bruno Jose do Nascimento"
 date: "20 de janeiro de 2016"
 output: html_document
 ---
@@ -9,15 +9,94 @@ output: html_document
 
 ```{r}
 library(readr)
+#install.packages("openxlsx")
+library(openxlsx)
+#install.packages("readxl")
+library(readxl)
+library(magrittr)
+library(dplyr)
+library(RSQLite)
 
-arq <- '_source/assets/dados/arq.txt'
-dados <- read.table(file = arq)
+```
 
-link_pnud <- 'https://www.dropbox.com/s/seqctcl46qeemgu/pnud_simplificado.rds?dl=1'
-tmp <- tempfile()
-httr::GET(link_pnud, httr::write_disk(tmp))
-pnud <- readRDS(tmp)
-file.remove(tmp)
+```{r}
+
+##1 - ARQUIVO TEXTO
+
+arq <- 'dados/pnud_win.txt'
+pnud_txt <- read.table(file = arq)
+
+summary(pnud_txt[,1:10])
+
+##2 - ARQUIVO CSV
+
+arq <- 'dados/pnud_win.csv'
+pnud_csv <- read.csv(file = arq)
+
+summary(pnud_csv[,1:10])
+
+
+##3 - ARQUIVO XLSx
+
+arq <- 'dados/pnud_win.xlsx'
+pnud_xlsx <- read.xlsx(arq)
+
+summary(pnud_xlsx[,1:10])
+
+#4 - ARQUIVO SQLITE
+
+
+arq_pnud <- 'dados/pnud.sqlite'
+
+pnud_sqlite <- src_sqlite(arq_pnud, TRUE)  %>% 
+  tbl("pnud")
+
+
+
+##5 - ARQUIVO RDS
+
+arq <- 'dados/pnud.rds'
+pnud_rds <- readRDS(arq)
+
+
+
+summary(pnud_rds[,1:10])
+
+##5 - ARQUIVO RDA
+
+arq <- 'dados/pnud.rda'
+pnud_rda <- load(arq)
+
+pnud_rda
+
+
+
+
+
+```
+
+EXERCICIO 2
+
+```{r}
+  arq <- 'dados/pnud_simplificado.rds'
+  pnud_simp <- readRDS(arq)
+  
+  
+  #Quais são os seis municípios com os maiores IDH municipais em 2010. 
+  pnud_simp %>%
+  select(ano, municipio, ufn,gini, starts_with("idhm")) %>%
+  filter(ano==2010) %>%
+  arrange(desc(idhm)) 
+  
+  #Qual é a unidade federativa com menor expectativa de vida média, ponderada pela população dos municípios em 2000.  
+   pnud_simp %>% filter(ano==2010) %>% group_by(ufn) %>% summarise(media = mean(idhm))%>% arrange(media)
+  
+  #Quais são os municípios outliers com relação ao índice de Gini em 1991 e em 2010 (Dica: utilize como critério para determinar outliers valores maiores que a média mais duas vezes o desvio padrão).
+ pnud_simp %>% filter(ano = 2010 | 1991) %>%
+  select(ano, municipio, ufn,gini, starts_with("idhm")) %>%
+  summarise(gini91 = mean(gini))
+  
+   
 
 ```
 
