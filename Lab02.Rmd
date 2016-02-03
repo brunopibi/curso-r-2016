@@ -51,6 +51,9 @@ arq_pnud <- 'dados/pnud.sqlite'
 pnud_sqlite <- src_sqlite(arq_pnud, TRUE)  %>% 
   tbl("pnud")
 
+pnud_dados <- collect(pnud_sqlite)
+summary(pnud_dados[,1:10])
+
 
 
 ##5 - ARQUIVO RDS
@@ -60,9 +63,8 @@ pnud_rds <- readRDS(arq)
 
 
 
-summary(pnud_rds[,1:10])
 
-##5 - ARQUIVO RDA
+##6 - ARQUIVO RDA
 
 arq <- 'dados/pnud.rda'
 pnud_rda <- load(arq)
@@ -92,9 +94,20 @@ EXERCICIO 2
    pnud_simp %>% filter(ano==2010) %>% group_by(ufn) %>% summarise(media = mean(idhm))%>% arrange(media)
   
   #Quais são os municípios outliers com relação ao índice de Gini em 1991 e em 2010 (Dica: utilize como critério para determinar outliers valores maiores que a média mais duas vezes o desvio padrão).
- pnud_simp %>% filter(ano = 2010 | 1991) %>%
-  select(ano, municipio, ufn,gini, starts_with("idhm")) %>%
-  summarise(gini91 = mean(gini))
+
+#1991   
+ pnud_simp %>% 
+   filter(ano == 1991) %>%
+   group_by(ano, municipio) %>%
+  summarise(gini91 = mean(gini) + 2*sd(gini))  %>%
+ arrange(desc(gini91))
+
+ #2010 
+ pnud_simp %>% 
+   filter(ano == 2010) %>%
+   group_by(ano, municipio) %>%
+  summarise(gini2010 = mean(gini) + 2*sd(gini))  %>%
+ arrange(desc(gini2010))
   
    
 
