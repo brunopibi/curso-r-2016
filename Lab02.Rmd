@@ -61,6 +61,8 @@ summary(pnud_dados[,1:10])
 arq <- 'dados/pnud.rds'
 pnud_rds <- readRDS(arq)
 
+summary(pnud_rds[,1:10])
+
 
 
 
